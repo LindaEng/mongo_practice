@@ -14,11 +14,8 @@ app.use(express.json())
 app.use('/api/products', productRoutes)
 
 
-
 app.get('/', (req, res) => {
-    console.log("IS IT THERE?",process.env.NODE_ENV)
-    throw Error("BROKEN")
-    // res.send('Hello World!')
+    res.send('Hello World!')
 })
 
 app.get('/blog', (req, res) => {
@@ -27,8 +24,8 @@ app.get('/blog', (req, res) => {
 
 app.use(errorMiddleWare)
 
-app.listen(PORT, () => console.log('Server running on port 3000'))
-
+mongoose.set("strictQuery", false)
 mongoose.connect(MONGO_URL).then(()=> {
     console.log('Connected to MongoDB')
+    app.listen(PORT, () => console.log('Server running on port 3000'))
 }).catch((err) => console.log(err))
