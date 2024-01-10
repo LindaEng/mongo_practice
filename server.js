@@ -4,11 +4,13 @@ const app = express()
 const productRoutes = require('./routes/productRoutes')
 const errorMiddleWare = require('./middleware/errorMiddleware')
 
+const cors = require('cors')
+
 require('dotenv').config()
 const MONGO_URL = process.env.MONGO_URL 
 const PORT = process.env.PORT || 3000
 
-
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/products', productRoutes)
